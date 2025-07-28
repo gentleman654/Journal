@@ -4,7 +4,7 @@ const router = express.Router();
 const Test_User = {username: 'admin', password: '1234'};
 
 
-router.get('/login', (req, res) => {
+router.get('/', (req, res) => {
     res.send(`
         <form method="POST" action="/login">
             <input type="text" name="username" placeholder="Username" />
@@ -13,11 +13,11 @@ router.get('/login', (req, res) => {
             </form>`); 
     });
 
-router.post('/login', (req, res) => {
+router.post('/', (req, res) => {
     const { username, password } = req.body;
     if (username === Test_User.username && password === Test_User.password) {
         req.session.user = { username };
-        res.redirect('/journals');
+        res.redirect('/home');
     } else {
         res.status(401).send('Invalid credentials');
     }

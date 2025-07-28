@@ -5,6 +5,7 @@ const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
 const authRoutes = require('./routes/auth');
+const homeRoutes = require('./routes/home');
 
 require('dotenv').config();
 
@@ -38,17 +39,14 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('✅ MongoDB connected'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// ✅ Root route
-app.get('/', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/journals');
-  } else {
-    res.redirect('/login');
-  }
-});
+
 
 // ✅ Routes
-app.use('/', authRoutes);
+app.use('/login', authRoutes);
+app.use("/home",homeRoutes)
+app.use("/", (req, res) => {
+    res.redirect('/home'); 
+});
 
 // ✅ Start server
 const PORT = process.env.PORT || 5000;
