@@ -40,7 +40,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log('✅ Database connected'))
-  .catch((err) => console.error('❌ Database connection error:', err));
+  .catch((err) => console.error(' Database connection error:', err));
 
 // ✅ Routes
 app.use('/login', authRoutes);
@@ -51,4 +51,4 @@ app.use('/', (req, res) => {
 
 // ✅ Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
